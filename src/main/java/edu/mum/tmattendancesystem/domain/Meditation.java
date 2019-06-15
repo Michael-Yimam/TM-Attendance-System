@@ -3,10 +3,9 @@ package edu.mum.tmattendancesystem.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -14,14 +13,22 @@ import java.util.Date;
 @Entity
 public class Meditation {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public enum MeditationType {
+
+        REGULAR, DC;
+    }
 
     private String location;
 
-    private Date date;
+    @Id
+    private LocalDate date;
 
+    @Enumerated(EnumType.STRING)
+    private MeditationTimeType timeType;
+
+    @Enumerated(EnumType.STRING)
     private MeditationType type;
 
-    private MeditationTime medTime;
+    @ManyToOne
+    private Block block;
 }
