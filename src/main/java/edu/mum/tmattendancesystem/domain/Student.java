@@ -1,24 +1,32 @@
 package edu.mum.tmattendancesystem.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
 @Entity
-public class Student {
+public class Student{
 
     @Id
-    private Long id;
+    @Column(name = "student_id")
+    private String id;
 
-    private String firstName;
+    private String barcode;
 
-    private String lastName;
+    private String entry;
 
-    private String email;
+//    @Ignore
+//    private List<TMAttendance> meditations;
 
-    /*More properties to be added */
+    @OneToMany
+    List<Retreat> retreats;
+
+    @OneToMany
+    List<TMChecking> tmCheckings;
+
+
 }
