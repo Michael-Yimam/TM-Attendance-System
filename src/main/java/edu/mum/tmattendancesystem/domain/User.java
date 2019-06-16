@@ -1,5 +1,6 @@
 package edu.mum.tmattendancesystem.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,12 +9,14 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
     @Id
     @Column(name = "user_id")
-    private String userName;
+    private String id;
 
     private String password;
 
