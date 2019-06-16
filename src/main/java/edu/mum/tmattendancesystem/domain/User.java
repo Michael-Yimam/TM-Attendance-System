@@ -15,9 +15,11 @@ public class User {
     @Column(name = "user_id")
     private String userName;
 
+    private String password;
+
     private String name;
 
-    private String password;
+   // private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
