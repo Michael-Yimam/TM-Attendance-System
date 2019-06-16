@@ -18,10 +18,10 @@ public class Meditation {
         REGULAR, DC;
     }
 
-    private String location;
-
     @Id
     private LocalDate date;
+
+    private String location;
 
     @Enumerated(EnumType.STRING)
     private MeditationTimeType timeType;
