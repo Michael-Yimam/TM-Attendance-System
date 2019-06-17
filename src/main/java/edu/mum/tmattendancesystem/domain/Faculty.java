@@ -2,9 +2,7 @@ package edu.mum.tmattendancesystem.domain;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +19,7 @@ public class Faculty {
 
     private String email;
 
-    private String password;
-
-
+//    @OneToOne
+//    @JoinColumn(name = "userCredential")
+//    private UserCredentials credentials;
 }

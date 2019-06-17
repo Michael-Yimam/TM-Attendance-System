@@ -6,22 +6,24 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseEnrollment {
+public class Admin {
+
     @Id
-    private int id;
+    private String id;
 
-    @OneToOne
-    @JoinColumn
-    private Student studentId;
+    private String name;
 
-    @OneToOne
-    @JoinColumn
-    private Course courseId;
+    private String email;
+
+//    @OneToOne
+//    @JoinTable(name = "userName")
+//    private UserCredentials credentials;
+
 }
