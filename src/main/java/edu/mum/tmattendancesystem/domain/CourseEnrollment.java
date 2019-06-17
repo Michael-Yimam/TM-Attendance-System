@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseTaken {
+public class CourseEnrollment {
     @Id
     private int id;
 
