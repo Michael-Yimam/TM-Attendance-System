@@ -65,5 +65,8 @@ values ('986957','algojune2019'),
        ('986958','algojune2019'),
        ('986950','algojune2019');
 
-
+Insert Into USER_CREDENTIALS(ACTIVE, PASSWORD,USER_ID,USER_ROLE)
+values (1, '123', '986957', 2),
+       (1, '123', 'admin', 1),
+       (1, '123', 'tina11', 3);
 
