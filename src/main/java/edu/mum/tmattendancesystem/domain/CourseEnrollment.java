@@ -17,7 +17,7 @@ public class CourseEnrollment {
     @Id
     @Column(name = "Enrollment_Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     //@ManyToMany
     //private List<Student> students;
