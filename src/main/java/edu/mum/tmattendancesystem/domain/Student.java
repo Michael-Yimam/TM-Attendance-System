@@ -22,23 +22,22 @@ public class Student{
 
     private String name;
 
-    private String password;
-
     private String barcode;
 
     private String entry;
+
+//    @OneToOne
+//    @JoinTable(name = "credential")
+//    private UserCredentials credentials;
 
 //    @Ignore
 //    private List<TMAttendance> meditations;
 
     @OneToMany
-    List<Retreat> retreats;
+    private List<Retreat> retreats;
 
     @OneToMany
-    List<TMChecking> tmCheckings;
-
- /*   @ManyToMany
-    private List<Course> courses = new ArrayList<>();*/
+    private List<TMChecking> tmCheckings;
 
 
 }
