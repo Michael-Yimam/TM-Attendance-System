@@ -1,4 +1,5 @@
 package edu.mum.tmattendancesystem.service;
 
-public interface UserService {
+public interface CourseOfferService {
+
 }
