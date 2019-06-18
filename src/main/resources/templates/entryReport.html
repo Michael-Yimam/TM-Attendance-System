@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Entry Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <style type="text/css">
+        #maincontent {
+            margin-top: 7em;
+            margin-bottom: -7em;
+        }
+    </style>
+</head>
+<body>
+<div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
+    <div class="ui container">
+        <a href="studentAttendance.html" class="item">TM Attendance</a>
+        <a href="checkingPage.html" class="item">TM Checking</a>
+        <a href="blockReport.html"  class="item">Block Report</a>
+        <a href="uploadAttendance.html" class="item">Upload Attendance</a>
+        <a href="entryReport.html" class="active item">Entry Report</a>
+        <div class="right menu">
+            <div class="item">
+                <a class="ui button">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="maincontent" class="ui main container">
+    <div class="ui form">
+        <div class="field">
+            <div class="three wide field">
+                <label>Entry: </label>
+                <select class="ui fluid dropdown">
+                <option value="">block</option>
+            </select>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="ui grid">
+        <div class="eight wide column">
+            <table class="ui small very compact celled table">
+                <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Sessions</th>
+                    <th>Attended</th>
+                    <th>Percentage</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
