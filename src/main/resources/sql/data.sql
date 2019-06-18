@@ -30,10 +30,10 @@ values ('waajune2019', 'WAA', 'June 2019', 'tina11'),
        ('sejune2019', 'SOFTWARE ENGINEERING', 'June 2019', 'kalu11'),
        ('mppjune2019', 'MPP', 'June 2019', 'renuka11');
 
-Insert Into ROLE(ROLE_ID, NAME)
-values (1, 'admin'),
-       (2, 'student'),
-       (3, 'faculty');
+Insert Into ROLE(ROLE_ID, ROLE)
+values (1, 'ADMIN'),
+       (2, 'STUDENT'),
+       (3, 'FACULTY');
 
 -- Insert Into User_Credentials(ACTIVE, PASSWORD, USER_ID, USER_ROLE)
 -- values (1, '1234', '986957', 2),
@@ -65,8 +65,8 @@ values ('986957','algojune2019'),
        ('986958','algojune2019'),
        ('986950','algojune2019');
 
-Insert Into USER_CREDENTIALS(ACTIVE, PASSWORD,USER_ID,USER_ROLE)
-values (1, '123', '986957', 2),
-       (1, '123', 'admin', 1),
-       (1, '123', 'tina11', 3);
+Insert Into USER_CREDENTIALS(ACTIVE, PASSWORD,USER_ID, role)
+values (1, '123', '986957', 'STUDENT'),
+       (1, '123', 'admin', 'ADMIN'),
+       (1, '123', 'tina11', 'FACULTY');
 
