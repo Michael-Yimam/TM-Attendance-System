@@ -24,7 +24,7 @@ public class UserCredentials {
     private Integer id;*/
 
     @Size(min = 4, max = 25, message = "User must be between 4 and 25 characters")
-    @NotEmpty(message = "*Please provide a user name")
+    @NotEmpty(message = "*Please provide a admin name")
     @Id
     @Column(name="user_id")
     private String userName;
