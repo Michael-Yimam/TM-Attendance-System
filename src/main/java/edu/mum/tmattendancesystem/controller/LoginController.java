@@ -2,10 +2,10 @@ package edu.mum.tmattendancesystem.controller;
 
 import javax.validation.Valid;
 
+import edu.mum.tmattendancesystem.domain.Faculty;
 import edu.mum.tmattendancesystem.domain.Role;
 import edu.mum.tmattendancesystem.domain.UserCredentials;
-import edu.mum.tmattendancesystem.service.RoleService;
-import edu.mum.tmattendancesystem.service.UserCredentialsService;
+import edu.mum.tmattendancesystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,10 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class FacultyLoginController {
+public class LoginController {
 
     @Autowired
     private UserCredentialsService userService;
+
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private AdminService adminService;
+
+    @Autowired
+    private FacultyService facultyService;
 
     @Autowired
     private RoleService roleService;
@@ -68,9 +77,10 @@ public class FacultyLoginController {
     }
 
     @RequestMapping(value="/admin/home", method = RequestMethod.GET)
-    public ModelAndView home(){
+    public ModelAndView adminHome(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("User Id: " + auth.getName());
         UserCredentials user = userService.findByUserName(auth.getName());
         //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
@@ -78,5 +88,40 @@ public class FacultyLoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/faculty/home", method = RequestMethod.GET)
+    public ModelAndView facultyHome(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("User Id: " + auth.getName());
+        UserCredentials user = userService.findByUserName(auth.getName());
+        //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
+        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        modelAndView.setViewName("faculty/home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/student/home", method = RequestMethod.GET)
+    public ModelAndView studentHome(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Logged in User Id: " + auth.getName());
+        UserCredentials user = userService.findByUserName(auth.getName());
+        //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
+        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        modelAndView.setViewName("student/home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/access-error", method = RequestMethod.GET)
+    public ModelAndView accessError(){
+        ModelAndView modelAndView = new ModelAndView();
+/*        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserCredentials user = userService.findByUserName(auth.getName());
+        //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
+        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        */
+        modelAndView.setViewName("403");
+        return modelAndView;
+    }
 }
 
