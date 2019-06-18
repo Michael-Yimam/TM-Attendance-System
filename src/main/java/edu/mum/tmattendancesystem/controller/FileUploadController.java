@@ -39,6 +39,11 @@ public class FileUploadController {
         return "adminPage";
     }
 
+    @GetMapping("/uploadAttendance")
+    public String uploadFile(){
+        return "uploadAttendance";
+    }
+
     @PostMapping("/fileUpload")
     public String singleFileUpload(@RequestParam("file")MultipartFile file,
                                    RedirectAttributes redirectAttributes){
@@ -55,7 +60,7 @@ public class FileUploadController {
         new Thread(() -> processFile(file)).start();
 
 
-        return "redirect:/adminPage";
+        return "redirect:/uploadAttendance";
     }
 
 //    @GetMapping("/adminPage")
