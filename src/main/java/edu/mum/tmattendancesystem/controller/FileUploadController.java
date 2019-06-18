@@ -2,7 +2,9 @@ package edu.mum.tmattendancesystem.controller;
 
 import edu.mum.tmattendancesystem.domain.AttendanceKey;
 import edu.mum.tmattendancesystem.domain.MeditationTimeType;
+import edu.mum.tmattendancesystem.domain.Student;
 import edu.mum.tmattendancesystem.domain.TMAttendance;
+import edu.mum.tmattendancesystem.service.StudentService;
 import edu.mum.tmattendancesystem.service.TMAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,12 +28,14 @@ public class FileUploadController {
     @Autowired
     TMAttendanceService tmAttendanceService;
 
+    @Autowired
+    StudentService studentService;
+
     //Save the uploaded file to this folder
     private static final String UPLOAD_LOCATION = "C://";
 
-    @GetMapping("/")
+    @GetMapping("/adminPage")
     public String index(){
-        System.out.println("*******************************");
         return "adminPage";
     }
 
@@ -47,15 +51,17 @@ public class FileUploadController {
         redirectAttributes.addFlashAttribute("uploadMessage",
                 "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
-        processFile(file);
+        // All file processing and uploading to database is handled by a separate thread
+        new Thread(() -> processFile(file)).start();
 
-        return "redirect:/";
+
+        return "redirect:/adminPage";
     }
 
-    @GetMapping("/admin")
-    public String adminpage(){
-        return "dash";
-    }
+//    @GetMapping("/adminPage")
+//    public String adminpage(){
+//        return "dash";
+//    }
 
     private void processFile(MultipartFile file){
 
@@ -88,38 +94,54 @@ public class FileUploadController {
     }
 
     private void parseEachLineToModel(List<String> allLines){
-    System.out.println("ddddd inside parse each line to model");
+
         for(String x : allLines){
             String[] arrayString = x.split(",");
             String[] date = arrayString[0].split("-");
 
-            TMAttendance tmAttendance = new TMAttendance();
+            TMAttendance tmAttendance;
 
             if(arrayString.length == 5){
 
-                tmAttendance.setAttendanceKey(new AttendanceKey(
-                        arrayString[1],
-                        LocalDate.of(Integer.parseInt(date[0]),
-                                     Integer.parseInt(date[1]),
-                                     Integer.parseInt(date[2]))));
-                tmAttendance.setBarcode(arrayString[2]);
-                tmAttendance.setLocation(arrayString[3]);
-                tmAttendance.setMeditationTimeType(MeditationTimeType.getMeditationTimeType(arrayString[4]));
+                tmAttendance = initializeTmAttendanceObject(arrayString[1], date, arrayString[2],
+                        arrayString[3], arrayString[4]);
 
-
-                System.out.println("/// " + tmAttendance.toString());
                 tmAttendanceService.save(tmAttendance);
 
-            }else if(arrayString.length == 4){
+            }else if(arrayString.length == 3){
 
+                Student student = studentService.findById(arrayString[1]);
+                System.out.println(student.getName());
 
+                tmAttendance = initializeTmAttendanceObject(arrayString[1], date, student.getBarcode(),
+                        "DB", "AM");
+                tmAttendanceService.save(tmAttendance);
 
             }else{
 
             }
 
-            System.out.println();
         }
+
+    }
+
+    private TMAttendance initializeTmAttendanceObject(String studentId, String[] date, String barCode,
+                                                     String location, String meditationTimeType){
+
+        TMAttendance tmAttendance = new TMAttendance();
+        tmAttendance.setAttendanceKey( new AttendanceKey(
+                studentId,
+                LocalDate.of(Integer.parseInt(date[0]),
+                        Integer.parseInt(date[1]),
+                        Integer.parseInt(date[2]))));
+        tmAttendance.setBarcode(barCode);
+        tmAttendance.setLocation(location);
+        tmAttendance.setMeditationTimeType(MeditationTimeType.getMeditationTimeType(meditationTimeType));
+
+        return tmAttendance;
+    }
+
+    private void removeDuplicateRecords(){
 
     }
 }
