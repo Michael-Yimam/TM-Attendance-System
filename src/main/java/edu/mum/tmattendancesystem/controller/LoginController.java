@@ -2,6 +2,7 @@ package edu.mum.tmattendancesystem.controller;
 
 import javax.validation.Valid;
 
+import edu.mum.tmattendancesystem.domain.Admin;
 import edu.mum.tmattendancesystem.domain.Faculty;
 import edu.mum.tmattendancesystem.domain.Role;
 import edu.mum.tmattendancesystem.domain.UserCredentials;
@@ -81,8 +82,8 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("User Id: " + auth.getName());
-        UserCredentials user = userService.findByUserName(auth.getName());
-        //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
+        Admin admin = adminService.findById(auth.getName());
+        modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + " (" + admin.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
         modelAndView.setViewName("admin/home");
         return modelAndView;
