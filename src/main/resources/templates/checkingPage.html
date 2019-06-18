@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>TM Attendance</title>
+    <title>TM Checking</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -17,13 +17,15 @@
     </style>
 </head>
 <body>
+
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="active item">TM Attendance</a>
-        <a href="checkingPage.html" class="item">TM Checking</a>
+        <a href="studentAttendance.html" class="item">TM Attendance</a>
+        <a href="checkingPage.html" class="active item">TM Checking</a>
         <a href="blockReport.html" class="item">Block Report</a>
         <a href="uploadAttendance.html" class="item">Upload Attendance</a>
         <a href="entryReport.html" class="item">Entry Report</a>
+
         <div class="right menu">
             <div class="item">
                 <a class="ui button">Logout</a>
@@ -32,34 +34,15 @@
     </div>
 </div>
 <div id="maincontent" class="ui main container">
-    <div class="ui form">
-        <div class="field">
-            <div class="three wide field">
-                Block: <select class="ui fluid dropdown">
-                <option value="">block</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <p>
-        Session in block: <span>0</span>
-    </p>
-    <p>
-        Days present: <span>0</span>
-    </p>
-    <p>
-        Percentage attended: <span>0</span>
-    </p>
-    <p>
-        Extra credit points: <span>0</span>
-    </p>
+
     <div class="ui grid">
         <div class="four wide column">
+            <label>TM Checking</label>
             <table class="ui small very compact celled table">
                 <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Present</th>
+                    <th>Type</th>
                 </tr>
                 </thead>
             </table>
@@ -67,5 +50,6 @@
     </div>
 
 </div>
+
 </body>
 </html>
