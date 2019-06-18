@@ -1,38 +1,349 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <title>Admin Page</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container">-->
+
+<!--    <form th:action="@{/logout}" method="get">-->
+<!--        <button class="btn btn-md btn-danger btn-block" name="registration"-->
+<!--                type="Submit">Logout-->
+<!--        </button>-->
+<!--    </form>-->
+
+<!--    <div class="panel-group" style="margin-top:40px">-->
+<!--        <div class="panel panel-primary">-->
+<!--            <h2> Welcome to the Admin Home Page</h2>-->
+<!--            &lt;!&ndash;<div class="panel-heading">-->
+<!--                <span th:utext="${userName}"></span>-->
+<!--            </div>-->
+<!--            <div class="panel-body">-->
+<!--                <img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400"-->
+<!--                     alt="Beer"/>-->
+<!--            </div>-->
+<!--            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html class="js" xmlns:th="http://www.thymeleaf.org/">
 
 <head>
-    <title>Admin Page</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <script>
+        (function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);
+    </script>
+    <style type="text/css">
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-font-smoothing: grayscale;
+        }
+
+        #sidebar {
+            position: fixed;
+            height: 100vh;
+            background-color: #f5f5f5;
+            padding-top: 68px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        #sidebar .ui.menu > a.item {
+            padding: 10px 20px;
+            line-height: 20px;
+            color: #337ab7;
+            border-radius: 0 !important;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        #sidebar .ui.menu > a.item.active {
+            background-color: #337ab7;
+            color: white;
+            border: none !important;
+        }
+
+        #sidebar .ui.menu > a.item:hover {
+            background-color: #eee;
+            color: #23527c;
+        }
+
+        #content {
+            padding-top: 56px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        #content h1 {
+            font-size: 36px;
+        }
+
+        #content .ui.dividing.header {
+            width: 100%;
+        }
+
+        .ui.centered.small.circular.image {
+            margin-top: 14px;
+            margin-bottom: 14px;
+        }
+
+        .ui.borderless.menu {
+            box-shadow: none;
+            flex-wrap: wrap;
+            border: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .ui.mobile.only.grid .ui.menu .ui.vertical.menu {
+            display: none;
+        }
+
+    </style>
+    <style type="text/css">
+
+        .js .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .inputfile + label {
+            max-width: 100%;
+            font-size: 1.25rem;
+            /* 20px */
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            padding: 0.625rem 1.25rem;
+            /* 10px 20px */
+        }
+
+        .no-js .inputfile + label {
+            display: none;
+        }
+
+        .inputfile:focus + label,
+        .inputfile.has-focus + label {
+            outline: 1px dotted #000;
+            outline: -webkit-focus-ring-color auto 5px;
+        }
+
+        .inputfile + label * {
+            /* pointer-events: none; */
+            /* in case of FastClick lib use */
+        }
+
+        .inputfile + label svg {
+            width: 1em;
+            height: 1em;
+            vertical-align: middle;
+            fill: currentColor;
+            margin-top: -0.25em;
+            /* 4px */
+            margin-right: 0.25em;
+            /* 4px */
+        }
+
+        .inputfile-6 + label {
+            color: #337ab7;
+        }
+
+        .inputfile-6 + label {
+            border: 1px solid #337ab7;
+            background-color: #f1e5e6;
+            padding: 0;
+        }
+
+        .inputfile-6:focus + label,
+        .inputfile-6.has-focus + label,
+        .inputfile-6 + label:hover {
+            border-color: #004080;
+        }
+
+        .inputfile-6 + label span,
+        .inputfile-6 + label strong {
+            padding: 0.625rem 1.25rem;
+            /* 10px 20px */
+        }
+
+        .inputfile-6 + label span {
+            width: 200px;
+            min-height: 2em;
+            display: inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: top;
+        }
+
+        .inputfile-6 + label strong {
+            height: 100%;
+            color: #f1e5e6;
+            background-color: #337ab7;
+            display: inline-block;
+        }
+
+        .inputfile-6:focus + label strong,
+        .inputfile-6.has-focus + label strong,
+        .inputfile-6 + label:hover strong {
+            background-color: #004080;
+        }
+
+        input[type = "submit"] {
+            width: 265px;
+            height: 35px;
+            border: 1px solid #337ab7;
+            font-size: 20px;
+            background-color: #337ab7;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type = "submit"]:hover {
+            background-color: #23527c;
+        }
+
+        @media screen and (max-width: 50em) {
+            .inputfile-6 + label strong {
+                display: block;
+            }
+        }
+
+
+    </style>
 </head>
-
-<body>
-<div class="container">
-
-    <form th:action="@{/logout}" method="get">
-        <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
-        </button>
-    </form>
-
-    <div class="panel-group" style="margin-top:40px">
-        <div class="panel panel-primary">
-            <h2> Welcome to the Admin Home Page</h2>
-            <!--<div class="panel-heading">
-                <span th:utext="${userName}"></span>
+<body id="root">
+<div class="ui tablet computer only padded grid">
+    <div class="ui inverted borderless top fixed fluid menu">
+        <a class="header item"><img th:src="@{/images/maharishi.jpg}"/>TM Attendance System</a>
+    </div>
+</div>
+<div class="ui mobile only padded grid">
+    <div class="ui top fixed borderless fluid inverted menu">
+        <a class="header item">Project Name</a>
+        <div class="right menu">
+            <div class="item">
+                <button class="ui icon toggle basic inverted button">
+                    <i class="content icon"></i>
+                </button>
             </div>
-            <div class="panel-body">
-                <img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400"
-                     alt="Beer"/>
+        </div>
+        <div class="ui vertical borderless inverted fluid menu">
+            <a class="item">Dashboard</a> <a class="item">Settings</a>
+            <a class="item">Profile</a> <a class="item">Help</a>
+            <div class="ui fitted divider"></div>
+            <div class="item">
+                <div class="ui small input"><input placeholder="Search..." /></div>
             </div>
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>-->
         </div>
     </div>
-
 </div>
+<div class="ui padded grid">
+    <div
+            class="three wide tablet only three wide computer only column"
+            id="sidebar"
+    >
+        <div class="ui vertical borderless fluid text menu">
+            <a class="active item">Upload File</a>
+            <a class="item">Add Block</a>
+
+        </div>
+    </div>
+    <div
+            class="sixteen wide mobile thirteen wide tablet thirteen wide computer right floated column"
+            id="content"
+    >
+        <div class="ui padded grid">
+            <div class="row">
+                <h1 class="ui huge dividing header">Upload TM Attendance File</h1>
+            </div>
+            <div id="uploadMessage" class="center aligned row" th:text="${uploadMessage}"></div>
+
+            <div class="center aligned row">
+
+                <form action="#" th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
+
+                    <input id="fInput" class="inputfile inputfile-6"
+                           data-multiple-caption="{count} files selected"
+                           type="file" name="file" multiple="">
+                    <label for="fInput">
+                        <span></span>
+                        <strong>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBow="0 0 20 17">
+                                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path>
+                                Choose a file...
+                            </svg>
+                        </strong>
+                    </label> <br/><br/>
+
+                    <input id="submit" type="submit" value="Upload">
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    /*
+	By Osvaldas Valutis, www.osvaldas.info
+	Available for use under the MIT License
+*/
+
+    'use strict';
+
+    ;( function ( document, window, index )
+    {
+        var inputs = document.querySelectorAll( '.inputfile' );
+        Array.prototype.forEach.call( inputs, function( input )
+        {
+            var label	 = input.nextElementSibling,
+                labelVal = label.innerHTML;
+
+            input.addEventListener( 'change', function( e )
+            {
+                var fileName = '';
+                if( this.files && this.files.length > 1 )
+                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                else
+                    fileName = e.target.value.split( '\\' ).pop();
+
+                if( fileName )
+                    label.querySelector( 'span' ).innerHTML = fileName;
+                else
+                    label.innerHTML = labelVal;
+            });
+
+            // Firefox bug fix
+            input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+            input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+        });
+    }( document, window, 0 ));
+</script>
 </body>
 </html>
