@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TM Attendance</title>
+    <title>Entry Report</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -19,11 +18,11 @@
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="active item">TM Attendance</a>
+        <a href="studentAttendance.html" class="item">TM Attendance</a>
         <a href="checkingPage.html" class="item">TM Checking</a>
-        <a href="blockReport.html" class="item">Block Report</a>
+        <a href="blockReport.html"  class="item">Block Report</a>
         <a href="uploadAttendance.html" class="item">Upload Attendance</a>
-        <a href="entryReport.html" class="item">Entry Report</a>
+        <a href="entryReport.html" class="active item">Entry Report</a>
         <div class="right menu">
             <div class="item">
                 <a class="ui button">Logout</a>
@@ -35,31 +34,23 @@
     <div class="ui form">
         <div class="field">
             <div class="three wide field">
-                Block: <select class="ui fluid dropdown">
+                <label>Entry: </label>
+                <select class="ui fluid dropdown">
                 <option value="">block</option>
-                </select>
+            </select>
             </div>
         </div>
     </div>
-    <p>
-        Session in block: <span>0</span>
-    </p>
-    <p>
-        Days present: <span>0</span>
-    </p>
-    <p>
-        Percentage attended: <span>0</span>
-    </p>
-    <p>
-        Extra credit points: <span>0</span>
-    </p>
+    <br>
     <div class="ui grid">
-        <div class="four wide column">
+        <div class="eight wide column">
             <table class="ui small very compact celled table">
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Present</th>
+                    <th>Student ID</th>
+                    <th>Sessions</th>
+                    <th>Attended</th>
+                    <th>Percentage</th>
                 </tr>
                 </thead>
             </table>
