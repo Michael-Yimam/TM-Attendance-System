@@ -22,7 +22,7 @@ Insert Into Faculty(FACULTY_ID, NAME, EMAIL)
 Insert Into Course_Offer(COURSE_ID,COURSE_NAME, BLOCK_ID, FACULTY_ID)
 values ('waajune2019', 'WAA', 'June 2019', 'tina11'),
        ('waamay2019', 'WAA', 'May 2019', 'tina11'),
-        ('mwajune2019', 'MWA', 'June 2019', 'asad11'),
+       ('mwajune2019', 'MWA', 'June 2019', 'asad11'),
        ('wapjune2019', 'WAP', 'June 2019', 'shereshta11'),
        ('algomay2019', 'ALGORITHM', 'May 2019', 'koraza11'),
        ('algojune2019', 'ALGORITHM', 'June 2019', 'kahan11'),
