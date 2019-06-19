@@ -27,9 +27,8 @@
     <div class="ui container">
         <a href="studentAttendance.html" class="item">TM Attendance</a>
         <a href="checkingPage.html" class="item">TM Checking</a>
-        <a href="blockReport.html"  class="item">Block Report</a>
-        <a th:href="@{/uploadAttendance}" class="active item">Upload Attendance</a>
-        <a href="entryReport.html" class="item">Entry Report</a>
+        <a th:href="@{/TM-attendance}"  class="item">View Morning TM Attendance</a>
+
         <div class="right menu">
             <div class="item">
                 <form th:action="@{/logout}" method="get">
@@ -39,9 +38,6 @@
                 </form>
             </div>
         </div>
-
-
-
 
     </div>
 </div>
@@ -59,7 +55,7 @@
             <div class="panel-heading">
                 <span th:utext="${userName}"></span>
             </div>
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            <p class="admin-message-text text-center" th:utext="${message}"></p>
         </div>
     </div>
 </div>
