@@ -31,7 +31,7 @@
     <div class="ui container">
         <a th:href="@{/studentAttendance}" class="active item">TM Attendance</a>
         <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="blockReport.html" class="item">Block Report</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}" class="item">Block Report</a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
         <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
 
@@ -40,7 +40,7 @@
                 <span id="userName" th:text="${student.name}"></span>
             </div>
             <div class="item">
-                <form action="#" th:action="@{/logout}" method="post">
+                <form th:action="@{/logout}" method="post">
                     <input class="ui button" type="submit" value="Logout" />
                 </form>
             </div>
