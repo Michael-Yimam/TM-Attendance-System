@@ -25,17 +25,15 @@
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="item">TM Attendance</a>
+        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
         <a href="checkingPage.html" class="item">TM Checking</a>
         <a href="blockReport.html"  class="item">Block Report</a>
         <a th:href="@{/uploadAttendance}" class="active item">Upload Attendance</a>
         <a href="entryReport.html" class="item">Entry Report</a>
         <div class="right menu">
             <div class="item">
-                <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-md btn-danger btn-block" name="registration"
-                            type="Submit">Logout
-                    </button>
+                <form th:action="@{/logout}" method="post">
+                    <input class="ui button" type="submit" value="Logout" />
                 </form>
             </div>
         </div>
