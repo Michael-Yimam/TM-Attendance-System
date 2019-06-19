@@ -2,14 +2,18 @@ package edu.mum.tmattendancesystem.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -31,6 +35,13 @@ public class SecurityConfig {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
+    @Bean
+    public PersistentTokenRepository tokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+        jdbcTokenRepositoryImpl.setDataSource(dataSource);
+        return jdbcTokenRepositoryImpl;
+    }
+
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -44,7 +55,7 @@ public class SecurityConfig {
 
     @Configuration
     @Order(1)
-    public static class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
+    public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -68,9 +79,11 @@ public class SecurityConfig {
                     .and().exceptionHandling()
                     .accessDeniedPage("/403")
                     .and()
-                    .headers().frameOptions().sameOrigin();
+                    .headers().frameOptions().sameOrigin()
+                    .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository());
 
             //.accessDeniedPage("/access-denied");
+            http.rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret");
         }
 
         @Override
@@ -84,7 +97,7 @@ public class SecurityConfig {
 
     @Configuration
     @Order(2)
-    public static class FacultySecurityConfig extends WebSecurityConfigurerAdapter {
+    public class FacultySecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -107,9 +120,11 @@ public class SecurityConfig {
                     .and().exceptionHandling()
                     .accessDeniedPage("/403")
                     .and()
-                    .headers().frameOptions().sameOrigin();
+                    .headers().frameOptions().sameOrigin()
+                    .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository());
 
             //.accessDeniedPage("/access-denied");
+            http.rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret");
         }
         @Override
         public void configure(WebSecurity web) throws Exception {
@@ -121,7 +136,7 @@ public class SecurityConfig {
 
     @Configuration
     @Order(3)
-    public static class StudentSecurityConfig extends WebSecurityConfigurerAdapter {
+    public class StudentSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -144,9 +159,11 @@ public class SecurityConfig {
                     .and().exceptionHandling()
                     .accessDeniedPage("/403")
                     .and()
-                    .headers().frameOptions().sameOrigin();
+                    .headers().frameOptions().sameOrigin()
+                    .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository());
 
             //.accessDeniedPage("/access-denied");
+            http.rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret");
         }
 
         @Override
@@ -157,12 +174,5 @@ public class SecurityConfig {
         }
     }
 
-/*    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("password")
-                .roles("USER");
-    }*/
 
 }

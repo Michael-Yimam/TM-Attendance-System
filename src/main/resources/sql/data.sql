@@ -1,11 +1,15 @@
+create table if not exists persistent_logins (
+  username varchar_ignorecase(100) not null,
+  series varchar(64) primary key,
+  token varchar(64) not null,
+  last_used timestamp not null
+  );
+
 -- Insert data into block table
-
-
 
 Insert Into Block(Block_Id, START_DATE, END_DATE, NUMBER_OF_MEDITATION, NUMBER_OF_WEEKS)
     values ('May 2019', '2019-04-29', '2019-05-23', 22, 4),
            ('June 2019', '2019-05-27', '2019-06-20', 22, 4);
-
 
 -- Insert data into Faculty Table
 Insert Into Faculty(FACULTY_ID, NAME, EMAIL)

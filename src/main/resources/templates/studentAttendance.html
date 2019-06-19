@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +27,9 @@
         <a href="entryReport.html" class="item">Entry Report</a>
         <div class="right menu">
             <div class="item">
-                <a class="ui button">Logout</a>
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input class="ui button" type="submit" value="Logout" />
+                </form>
             </div>
         </div>
     </div>
@@ -34,8 +37,13 @@
 <div id="maincontent" class="ui main container">
     <div class="ui form">
         <div class="field">
+            <div class="three wide field" sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')">
+                <label>Student ID:</label>
+                <input type="text" name="studentId">
+            </div>
             <div class="three wide field">
-                Block: <select class="ui fluid dropdown">
+                <label>Block:</label>
+                <select class="ui fluid dropdown">
                 <option value="">block</option>
                 </select>
             </div>

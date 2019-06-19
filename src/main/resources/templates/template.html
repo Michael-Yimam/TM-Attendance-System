@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +11,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 </head>
 <body>
-<div th:replace="fragments/navbar :: nav"></div>
+<div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
+    <div class="ui container">
+        <a th:href="@{/attendanceDemo}" class="item">TM Attendance</a>
+        <a sec:authorize="hasRole('STUDENT')" href="checkingPage.html" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" href="blockReport.html"  class="active item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" href="uploadAttendance.html" class="item">Upload Attendance</a>
+        <a th:href="@{/csvdemo}" class="item">Entry Report</a>
+        <div class="right menu">
+            <div class="item">
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input class="ui button" type="submit" value="Logout" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 7em; margin-bottom: -7em;">
+    <h1> Role:
+        <span sec:authentication="principal.authorities"></span>
+    </h1>
+    <div sec:authorize="hasRole('ADMIN')">
+        This content is only shown to administrators.
+    </div>
+    <div sec:authentication="name">
+        The value of the "name" property of the authentication object should appear here.
+    </div>
+
+<!--    <div sec:authentication="name"></div> &lt;!&ndash; works fine &ndash;&gt;-->
+<!--    <div sec:authentication="principal.authorities"></div> &lt;!&ndash; works fine &ndash;&gt;-->
+
+    <div sec:authorize="isAuthenticated()" >true</div> <!-- works fine -->
+    <span th:text="${#authorization.expression('isAuthenticated()')}"></span> <!-- works fine -->
+
+    <div sec:authorize="${hasRole('ADMIN')}" > IS ADMIN </div> <!-- Doesnt work -->
+    <div sec:authorize="${hasRole(#vars.role_admin)}" > IS ADMIN </div> <!-- Doesnt work -->
+    <div th:text="${#authorization.expression('hasRole(''ADMIN'')')} "></div> <!-- Doesnt work -->
+    <div th:text="${#authorization.expression('hasRole(#vars.role_admin)')}"></div> <!-- Doesnt work -->
+</div>
 </body>
 </html>
