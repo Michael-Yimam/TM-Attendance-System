@@ -41,7 +41,7 @@ public class FileUploadController {
 
     @GetMapping("/uploadAttendance")
     public String uploadFile(){
-        return "uploadAttendance";
+        return "admin/uploadAttendance";
     }
 
     @PostMapping("/fileUpload")

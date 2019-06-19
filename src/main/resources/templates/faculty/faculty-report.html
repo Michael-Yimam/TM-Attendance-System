@@ -27,9 +27,8 @@
     <div class="ui container">
         <a href="studentAttendance.html" class="item">TM Attendance</a>
         <a href="checkingPage.html" class="item">TM Checking</a>
-        <a href="blockReport.html"  class="item">Block Report</a>
-        <a th:href="@{/uploadAttendance}" class="active item">Upload Attendance</a>
-        <a href="entryReport.html" class="item">Entry Report</a>
+        <a th:href="@{/attendance/block-report}"  class="item">View Morning TM Attendance</a>
+
         <div class="right menu">
             <div class="item">
                 <form th:action="@{/logout}" method="get">
@@ -40,12 +39,8 @@
             </div>
         </div>
 
-
-
-
     </div>
 </div>
-
 <div class="container">
 
     <form th:action="@{/logout}" method="get">
@@ -59,56 +54,54 @@
             <div class="panel-heading">
                 <span th:utext="${userName}"></span>
             </div>
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            <p class="admin-message-text text-center" th:utext="${message}"></p>
         </div>
     </div>
 </div>
 <div id="maincontent" class="ui main container">
-    <div class="ui form">
-        <div class="field">
-            <div class="four wide field">
 
+<!--Select course id and Student id-->
+<div  class="ui segment">
+    <form class="ui form" th:action = "@{/TM-attendance/block}" method = "POST">
+        <h4 class="ui dividing header">TM Attendance Per Course</h4>
+        <div class="two fields">
+            <div class="field">
+                <label>Course Id/Block Number</label>
+                <select class="ui fluid dropdown" th:name="courseId" th:maxlength="20">
+                    <option selected value = ""> --Select Course Id</option>
+                    <option th:each = "item: ${courses}"
+                            th:value="${item.id}"
+                            th:label="${item.id}">
+                    </option>
+                </select>
             </div>
         </div>
-    </div>
-    <br>
 
+        <button type="Submit" class="ui primary button">Submit</button>
+    </form>
 </div>
-<script type="text/javascript">
-    /*
-	By Osvaldas Valutis, www.osvaldas.info
-	Available for use under the MIT License
-*/
-
-    'use strict';
-
-    ;( function ( document, window, index )
-    {
-        var inputs = document.querySelectorAll( '.inputfile' );
-        Array.prototype.forEach.call( inputs, function( input )
-        {
-            var label	 = input.nextElementSibling,
-                labelVal = label.innerHTML;
-
-            input.addEventListener( 'change', function( e )
-            {
-                var fileName = '';
-                if( this.files && this.files.length > 1 )
-                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-                else
-                    fileName = e.target.value.split( '\\' ).pop();
-
-                if( fileName )
-                    label.querySelector( 'span' ).innerHTML = fileName;
-                else
-                    label.innerHTML = labelVal;
-            });
-
-            // Firefox bug fix
-            input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
-            input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
-        });
-    }( document, window, 0 ));
-</script>
+<div  class="ui segment">
+    <form class="ui form" th:action = "@{/TM-attendance/block/student}" method = "POST">
+        <h4 class="ui dividing header">TM Attendance Per Student </h4>
+        <div class="two fields">
+            <div class="field">
+                <label>Course Id</label>
+                <select class="ui fluid dropdown" th:name="courseId" th:maxlength="16">
+                    <option selected value = ""> --Select Course Id</option>
+                    <option th:each = "item: ${courses}"
+                            th:value="${item.id}"
+                            th:label="${item.id}">
+                    </option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Student Id</label>
+                <input type="text" th:name="studentId" maxlength="16" placeholder="Student Id">
+            </div>
+        </div>
+        <button type="Submit" class="ui primary button">Submit</button>
+    </form>>
+</div>
+</div>
 </body>
 </html>

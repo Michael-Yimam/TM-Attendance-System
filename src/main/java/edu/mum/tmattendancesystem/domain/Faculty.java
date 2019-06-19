@@ -6,8 +6,7 @@ import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 public class Faculty {
 
@@ -19,7 +18,4 @@ public class Faculty {
 
     private String email;
 
-//    @OneToOne
-//    @JoinColumn(name = "userCredential")
-//    private UserCredentials credentials;
 }

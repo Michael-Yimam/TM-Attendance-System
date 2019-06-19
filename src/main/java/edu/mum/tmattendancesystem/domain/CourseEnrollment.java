@@ -21,7 +21,7 @@ public class CourseEnrollment {
 
     //@ManyToMany
     //private List<Student> students;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Student student;
 

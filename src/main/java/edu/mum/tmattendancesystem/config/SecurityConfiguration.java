@@ -18,10 +18,14 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-/*    @Autowired
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     @Autowired
+    private LoginSuccessHandler authenticationSuccessHandler;
+    @Autowired
+
     private DataSource dataSource;
 
     @Value("${spring.queries.users-query}")
@@ -52,7 +56,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**", "/h2-console/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home")
+                .successHandler(authenticationSuccessHandler)
+                //.defaultSuccessUrl("/admin/home")
                 .usernameParameter("userName")
                 .passwordParameter("password")
                 .and().logout()
@@ -70,8 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
             web.ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-            //, "/h2-console/**"
-    }*/
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**");
+    }
 
 }
