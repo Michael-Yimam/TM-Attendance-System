@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
@@ -29,17 +30,19 @@
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
         <a th:href="@{/studentAttendance}" class="active item">TM Attendance</a>
-        <a th:href="@{/checkingPage}" class="item">TM Checking</a>
-<!--        <a th:href="blockReport.html" class="item">Block Report</a>-->
-<!--        <a th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>-->
-<!--        <a th:href="entryReport.html" class="item">Entry Report</a>-->
+        <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}" class="item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
 
         <div class="right menu">
             <div class="item">
                 <span id="userName" th:text="${student.name}"></span>
             </div>
             <div class="item">
-                <a class="ui button">Logout</a>
+                <form th:action="@{/logout}" method="post">
+                    <input class="ui button" type="submit" value="Logout" />
+                </form>
             </div>
         </div>
     </div>
@@ -68,13 +71,17 @@
                     </fieldset>
                 <br/><br/>
                 </div>
-<!--                Block: <select class="ui fluid dropdown" >-->
-<!--                <option value="">block</option>-->
-<!--            </select>-->
-                Block: <select id="meditationBlock" class="ui fluid dropdown" >
-                            <option value="">-- Select Block --</option>
-                            <option th:each="block,i : ${blocks}" th:value="${block.name}" th:text="${block.name}">block</option>
-                        </select>
+                    <div class="three wide field" sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')">
+                        <label>Student ID:</label>
+                        <input type="text" name="studentId">
+                    </div>
+                    <label>
+                        Block:
+                    </label> 
+                    <select id="meditationBlock" class="ui fluid dropdown" >
+                        <option value="">-- Select Block --</option>
+                        <option th:each="block,i : ${blocks}" th:value="${block.name}" th:text="${block.name}">block</option>
+                    </select>
             </div>
         </div>
     </div>

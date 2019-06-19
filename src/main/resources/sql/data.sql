@@ -1,3 +1,13 @@
+
+create table if not exists persistent_logins (
+  username varchar_ignorecase(100) not null,
+  series varchar(64) primary key,
+  token varchar(64) not null,
+  last_used timestamp not null
+  );
+
+-- Insert data into block table
+
 Insert Into Block(Block_Id, START_DATE, END_DATE, NUMBER_OF_MEDITATION, NUMBER_OF_WEEKS)
     values ('November 2018', '2018-11-01', '2018-11-24', 21, 4),
            ('December 2018', '2018-11-26', '2018-12-08', 12, 2),
@@ -139,7 +149,6 @@ values ('2018-11-01','DB','AM','REGULAR','November 2018'),
 Insert Into Block(Block_Id, START_DATE, END_DATE, NUMBER_OF_MEDITATION, NUMBER_OF_WEEKS)
     values ('May 2019', '2019-04-29', '2019-05-23', 22, 4),
            ('June 2019', '2019-05-27', '2019-06-20', 22, 4);
->>>>>>> 10ceb39769c94137e13c73d9fc3adfd9bd02b1e2
 
 
 -- Insert data into Faculty Table
@@ -190,137 +199,7 @@ Insert Into Admin(ID, NAME, EMAIL)
 values ('admin', 'admin', 'admin@mum.edu');
 
 Insert Into COURSE_ENROLLMENT(STUDENT_STUDENT_ID,COURSE_ID)
-<<<<<<< HEAD
-values ('986957','algofebruary2019'),
-       ('986957','semarch2019'),
-       ('986959','wapjanuary2019'),
-       ('986960','mljanuary2019'),
-       ('986955','algojanuary2019'),
-       ('986954','mwajanuary2019'),
-       ('986952','algofebruary2019'),
-       ('986958','algojanuary2019'),
-       ('986950','algofebruary2019');
-=======
-values ('986957','algojune2019'),
-       ('986957','sejune2019'),
-       ('986959','wapjune2019'),
-       ('986960','mlmay2019'),
-       ('986955','algojune2019'),
-       ('986954','mwajune2019'),
-       ('986952','algojune2019'),
-       ('986958','algojune2019'),
-       ('986950','algojune2019'),
-       ('986958','waajune2019'),
-       ('986950','waajune2019');
->>>>>>> 10ceb39769c94137e13c73d9fc3adfd9bd02b1e2
 
 Insert Into USER_CREDENTIALS(ACTIVE, PASSWORD,USER_ID, role)
 values (1, '123', 'admin', 'ADMIN'),
        (1, '123', 'tina11', 'FACULTY');
-
-<<<<<<< HEAD
-Insert Into MEDITATION(DATE, LOCATION, TIME_TYPE, TYPE, BLOCK_BLOCK_ID)
-values ('2018-11-01','DB','AM','REGULAR','November 2018'),
-        ('2018-11-02','DB','AM','REGULAR','November 2018'),
-        ('2018-11-03','DB','AM','REGULAR','November 2018'),
-        ('2018-11-05','DB','AM','REGULAR','November 2018'),
-        ('2018-11-06','DB','AM','REGULAR','November 2018'),
-        ('2018-11-07','DB','AM','REGULAR','November 2018'),
-        ('2018-11-08','DB','AM','REGULAR','November 2018'),
-        ('2018-11-09','DB','AM','REGULAR','November 2018'),
-        ('2018-11-10','DB','AM','REGULAR','November 2018'),
-        ('2018-11-12','DB','AM','REGULAR','November 2018'),
-        ('2018-11-13','DB','AM','REGULAR','November 2018'),
-        ('2018-11-14','DB','AM','REGULAR','November 2018'),
-        ('2018-11-15','DB','AM','REGULAR','November 2018'),
-        ('2018-11-16','DB','AM','REGULAR','November 2018'),
-        ('2018-11-17','DB','AM','REGULAR','November 2018'),
-        ('2018-11-19','DB','AM','REGULAR','November 2018'),
-        ('2018-11-20','DB','AM','REGULAR','November 2018'),
-        ('2018-11-21','DB','AM','REGULAR','November 2018'),
-        ('2018-11-22','DB','AM','REGULAR','November 2018'),
-        ('2018-11-23','DB','AM','REGULAR','November 2018'),
-        ('2018-11-24','DB','AM','REGULAR','November 2018'),
-
-        ('2018-11-26','DB','AM','REGULAR','December 2018'),
-        ('2018-11-27','DB','AM','REGULAR','December 2018'),
-        ('2018-11-28','DB','AM','REGULAR','December 2018'),
-        ('2018-11-29','DB','AM','REGULAR','December 2018'),
-        ('2018-11-30','DB','AM','REGULAR','December 2018'),
-        ('2018-12-01','DB','AM','REGULAR','December 2018'),
-        ('2018-12-03','DB','AM','REGULAR','December 2018'),
-        ('2018-12-04','DB','AM','REGULAR','December 2018'),
-        ('2018-12-05','DB','AM','REGULAR','December 2018'),
-        ('2018-12-06','DB','AM','REGULAR','December 2018'),
-        ('2018-12-07','DB','AM','REGULAR','December 2018'),
-        ('2018-12-08','DB','AM','REGULAR','December 2018'),
-
-       ('2019-01-02','DB','AM','REGULAR','January 2019'),
-       ('2019-01-03','DB','AM','REGULAR','January 2019'),
-       ('2019-01-04','DB','AM','REGULAR','January 2019'),
-       ('2019-01-05','DB','AM','REGULAR','January 2019'),
-       ('2019-01-07','DB','AM','REGULAR','January 2019'),
-       ('2019-01-08','DB','AM','REGULAR','January 2019'),
-       ('2019-01-09','DB','AM','REGULAR','January 2019'),
-       ('2019-01-10','DB','AM','REGULAR','January 2019'),
-       ('2019-01-11','DB','AM','REGULAR','January 2019'),
-       ('2019-01-12','DB','AM','REGULAR','January 2019'),
-       ('2019-01-14','DB','AM','REGULAR','January 2019'),
-       ('2019-01-15','DB','AM','REGULAR','January 2019'),
-       ('2019-01-16','DB','AM','REGULAR','January 2019'),
-       ('2019-01-17','DB','AM','REGULAR','January 2019'),
-       ('2019-01-18','DB','AM','REGULAR','January 2019'),
-       ('2019-01-19','DB','AM','REGULAR','January 2019'),
-       ('2019-01-21','DB','AM','REGULAR','January 2019'),
-       ('2019-01-22','DB','AM','REGULAR','January 2019'),
-       ('2019-01-23','DB','AM','REGULAR','January 2019'),
-       ('2019-01-24','DB','AM','REGULAR','January 2019'),
-       ('2019-01-25','DB','AM','REGULAR','January 2019');
-=======
-
-Insert Into TMATTENDANCE(DATE, STUDENT_ID,BARCODE, Location, Meditation_Time_Type)
-values ('2019-06-10', '986957', '1234', 'DH', 'EAM'),
-       ('2019-06-10', '986959', '1235', 'DH', 'AM'),
-       ('2019-06-10', '986960', '1236', 'DH', 'AM'),
-       ('2019-06-10', '986955', '1237', 'DH', 'EAM'),
-       ('2019-06-10', '986954', '1238', 'DH', 'EAM'),
-       ('2019-06-10', '986952', '1239', 'DH', 'AM'),
-       ('2019-06-10', '986958', '1245', 'DH', 'EAM'),
-       ('2019-06-10', '986950', '1247', 'DH', 'AM'),
-       ('2019-06-11', '986957', '1234', 'DH', 'AM'),
-       ('2019-06-11', '986959', '1235', 'DH', 'AM'),
-       ('2019-06-11', '986960', '1236', 'DH', 'EAM'),
-       ('2019-06-11', '986955', '1237', 'DH', 'EAM'),
-       ('2019-06-11', '986954', '1238', 'DH', 'EAM'),
-       ('2019-06-11', '986952', '1239', 'DH', 'AM'),
-       ('2019-06-11', '986958', '1242', 'DH', 'AM'),
-       ('2019-06-11', '986950', '1247', 'DH', 'EAM'),
-       ('2019-06-12', '986957', '1234', 'DH', 'AM'),
-       ('2019-06-12', '986959', '1235', 'DH', 'EAM'),
-       ('2019-06-12', '986960', '1236', 'DH', 'AM'),
-       ('2019-06-12', '986955', '1237', 'DH', 'EAM'),
-       ('2019-06-12', '986954', '1238', 'DH', 'AM'),
-       ('2019-06-12', '986952', '1239', 'DH', 'EAM'),
-       ('2019-06-12', '986950', '1243', 'DH', 'AM'),
-       ('2019-06-12', '986958', '1245', 'DH', 'AM'),
-       ('2019-06-13', '986950', '1247', 'DH', 'AM'),
-       ('2019-05-12', '986957', '1234', 'DH', 'EAM'),
-       ('2019-05-12', '986959', '1235', 'DH', 'EAM'),
-       ('2019-05-12', '986960', '1236', 'DH', 'AM'),
-       ('2019-05-12', '986955', '1237', 'DH', 'AM'),
-       ('2019-05-12', '986954', '1238', 'DH', 'EAM'),
-       ('2019-05-12', '986952', '1239', 'DH', 'EAM'),
-       ('2019-05-12', '986958', '1242', 'DH', 'AM'),
-       ('2019-05-12', '986950', '1243', 'DH', 'AM'),
-       ('2019-05-13', '986958', '1245', 'DH', 'AM'),
-       ('2019-05-13', '986950', '1247', 'DH', 'AM'),
-       ('2019-05-14', '986957', '1234', 'DH', 'EAM'),
-       ('2019-05-15', '986959', '1235', 'DH', 'EAM'),
-       ('2019-05-15', '986960', '1236', 'DH', 'AM'),
-       ('2019-05-15', '986955','1237', 'DH', 'EAM'),
-       ('2019-05-15', '986954', '1238', 'DH', 'AM'),
-       ('2019-05-15', '986952', '1239', 'DH', 'EAM'),
-       ('2019-05-15', '986958', '1242', 'DH', 'AM'),
-       ('2019-05-15', '986950', '1243', 'DH', 'AM'),
-       ('2019-05-16', '986958', '1245', 'DH', 'EAM'),
-       ('2019-05-16', '986950', '1247', 'DH', 'AM');*/
