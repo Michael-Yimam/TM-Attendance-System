@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,5 +18,10 @@ public class TMAttendanceServiceImpl implements TMAttendanceService {
     @Override
     public TMAttendance save(TMAttendance tmAttendance) {
         return tmAttendanceRepository.save(tmAttendance);
+    }
+
+    @Override
+    public List<TMAttendance> findAttendanceOfAStudent(String studentId) {
+        return tmAttendanceRepository.findAttendanceOfAStudent(studentId);
     }
 }
