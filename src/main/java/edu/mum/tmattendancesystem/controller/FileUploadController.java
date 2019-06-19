@@ -34,9 +34,9 @@ public class FileUploadController {
     //Save the uploaded file to this folder
     private static final String UPLOAD_LOCATION = "C://Users/Fisseha/Desktop";
 
-    @GetMapping("/adminPage")
+    @GetMapping("/admin")
     public String index(){
-        return "adminPage";
+        return "/admin/home";
     }
 
     @GetMapping("/uploadAttendance")
@@ -50,14 +50,24 @@ public class FileUploadController {
 
         if(file.isEmpty()){
             redirectAttributes.addFlashAttribute("uploadMessage", "Please Select a file to upload");
-            return "redirect:/";
+            return "redirect:/uploadAttendance";
         }
 
         redirectAttributes.addFlashAttribute("uploadMessage",
                 "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
+        Path[] path = {null};
+        try{
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            path[0] = Paths.get(UPLOAD_LOCATION + file.getOriginalFilename());
+            Files.write(path[0], bytes);
+        }catch(IOException ie){
+            System.out.println("exception happened while trying to save the file");
+        }
+
         // All file processing and uploading to database is handled by a separate thread
-        new Thread(() -> processFile(file)).start();
+        new Thread(() -> processFile(path[0])).start();
 
 
         return "redirect:/uploadAttendance";
@@ -68,14 +78,14 @@ public class FileUploadController {
 //        return "dash";
 //    }
 
-    private void processFile(MultipartFile file){
+    private void processFile(Path path){
 
         try{
 
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOAD_LOCATION + file.getOriginalFilename());
-            Files.write(path, bytes);
+//            // Get the file and save it somewhere
+//            byte[] bytes = file.getBytes();
+//            Path path = Paths.get(UPLOAD_LOCATION + file.getOriginalFilename());
+//            Files.write(path, bytes);
 
             List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
             parseEachLineToModel(allLines);

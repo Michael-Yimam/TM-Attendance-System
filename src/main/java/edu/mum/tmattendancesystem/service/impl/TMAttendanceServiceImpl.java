@@ -1,6 +1,5 @@
 package edu.mum.tmattendancesystem.service.impl;
 
-import edu.mum.tmattendancesystem.domain.AttendanceKey;
 import edu.mum.tmattendancesystem.domain.TMAttendance;
 import edu.mum.tmattendancesystem.repository.TMAttendanceRepository;
 import edu.mum.tmattendancesystem.service.TMAttendanceService;
@@ -33,5 +32,10 @@ public class TMAttendanceServiceImpl implements TMAttendanceService {
     public List<TMAttendance> findByStudentAndBlock(String id, LocalDate startDate, LocalDate endDate) {
         Map<LocalDate, Boolean> attendance = new HashMap<>();
         return tmAttendanceRepository.findByStudentAndBlock(id, startDate, endDate);
+    }
+
+    @Override
+    public List<TMAttendance> findAttendanceOfAStudent(String studentId) {
+        return tmAttendanceRepository.findAttendanceOfAStudent(studentId);
     }
 }

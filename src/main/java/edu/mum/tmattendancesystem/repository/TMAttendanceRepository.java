@@ -1,6 +1,5 @@
 package edu.mum.tmattendancesystem.repository;
 
-import edu.mum.tmattendancesystem.TmAttendanceSystemApplication;
 import edu.mum.tmattendancesystem.domain.AttendanceKey;
 import edu.mum.tmattendancesystem.domain.TMAttendance;
 import org.springframework.data.jpa.repository.Query;
@@ -18,8 +17,13 @@ public interface TMAttendanceRepository extends CrudRepository<TMAttendance, Att
 
     @Query(value = "Select * from TMAttendance where Student_Id =:id AND " +
             "DATE between :startDate And :endDate", nativeQuery = true)
-    List<TMAttendance> findByStudentAndBlock(@Param("id") String id, @Param("startDate")LocalDate startDate,
-                                       @Param("endDate") LocalDate endDate);
+    List<TMAttendance> findByStudentAndBlock(@Param("id") String id, @Param("startDate") LocalDate startDate,
+                                             @Param("endDate") LocalDate endDate);
     @Query(value = "Select * from TMAttendance where STUDENT_ID =:id", nativeQuery = true)
     List<TMAttendance> findByStudentId(@Param("id")  String id);
+
+    @Query(value = "SELECT * FROM TMATTENDANCE WHERE STUDENT_ID= ?1", nativeQuery= true)
+    List<TMAttendance> findAttendanceOfAStudent(String studentId);
+
+
 }

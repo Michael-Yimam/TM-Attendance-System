@@ -14,7 +14,7 @@ import java.util.List;
 public class BlockServiceImpl implements BlockService {
 
     @Autowired
-    private BlockRepository blockRepository;
+    BlockRepository blockRepository;
 
     @Override
     public List<Block> findAll() {
