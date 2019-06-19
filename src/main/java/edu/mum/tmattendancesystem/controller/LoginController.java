@@ -89,18 +89,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/faculty/home", method = RequestMethod.GET)
-    public ModelAndView facultyHome(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("User Id: " + auth.getName());
-        UserCredentials user = userService.findByUserName(auth.getName());
-        //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("faculty/home");
-        return modelAndView;
-    }
-
     @RequestMapping(value="/student/home", method = RequestMethod.GET)
     public ModelAndView studentHome(){
         ModelAndView modelAndView = new ModelAndView();
