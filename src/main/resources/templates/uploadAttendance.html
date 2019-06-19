@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en" class=".js"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Upload Attendance</title>
-    <link rel="stylesheet" th:href="@{/css/fileUpload.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/fileUpload.css}"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
@@ -14,16 +14,17 @@
             margin-top: 7em;
             margin-bottom: -7em;
         }
+
     </style>
 </head>
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="item">TM Attendance</a>
-        <a href="checkingPage.html" class="item">TM Checking</a>
-        <a href="blockReport.html"  class="item">Block Report</a>
-        <a href="uploadAttendance.html" class="active item">Upload Attendance</a>
-        <a href="entryReport.html" class="item">Entry Report</a>
+        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
+        <a th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a th:href="@{/blockReport}"  class="item">Block Report</a>
+        <a th:href="@{/uploadAttendance}" class="active item">Upload Attendance</a>
+        <a th:href="entryReport.html" class="item">Entry Report</a>
         <div class="right menu">
             <div class="item">
                 <a class="ui button">Logout</a>
@@ -31,7 +32,11 @@
         </div>
     </div>
 </div>
+
 <div id="maincontent" class="ui main container">
+    <div class="header">
+        <h1 class="uploadHeader">Upload TM Attendance File</h1>
+    </div><br/>
     <div class="ui form">
         <div class="field">
             <div class="four wide field">
@@ -40,6 +45,7 @@
 <!--                    <input type="file" class="ui input">-->
 <!--                    <input type="submit" class="ui button">-->
 <!--                </form>-->
+                <div id="uploadMessage" class="center aligned row" th:text="${uploadMessage}"></div>
                 <form action="#" th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
 
                     <input id="fInput" class="inputfile inputfile-6"

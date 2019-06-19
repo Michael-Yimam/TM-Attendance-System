@@ -29,17 +29,16 @@ public class  PopulateUser implements ApplicationListener<ApplicationReadyEvent>
         userRepository.save(new UserCredentials("admin", bCryptPasswordEncoder.encode("12345"), "ADMIN", 1));
         userRepository.save(new UserCredentials("tina11", bCryptPasswordEncoder.encode("12345"), "FACULTY", 1));
         userRepository.save(new UserCredentials("asad11", bCryptPasswordEncoder.encode("12345"), "FACULTY", 1));
-        userRepository.save(new UserCredentials("9869", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9870", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9871", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9860", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9880", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9845", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9861", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9862", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9863", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9875", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9881", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
-        userRepository.save(new UserCredentials("9889", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986957", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986958", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986959", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986960", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986955", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986954", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986953", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986952", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986951", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+        userRepository.save(new UserCredentials("986950", bCryptPasswordEncoder.encode("12345"), "STUDENT", 1));
+
     }
 }
