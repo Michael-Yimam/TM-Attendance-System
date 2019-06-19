@@ -15,17 +15,30 @@
             margin-top: 7em;
             margin-bottom: -7em;
         }
+
+        .resultItem{
+            position: absolute;
+            margin-left: 80%;
+            width: 200px;
+            background-color: lightgray;
+            border-radius: 2px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="active item">TM Attendance</a>
-        <a href="checkingPage.html" class="item">TM Checking</a>
-        <a href="blockReport.html" class="item">Block Report</a>
-        <a href="uploadAttendance.html" class="item">Upload Attendance</a>
-        <a href="entryReport.html" class="item">Entry Report</a>
+        <a th:href="@{/studentAttendance}" class="active item">TM Attendance</a>
+        <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="blockReport.html" class="item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
+
         <div class="right menu">
+            <div class="item">
+                <span id="userName" th:text="${student.name}"></span>
+            </div>
             <div class="item">
                 <form action="#" th:action="@{/logout}" method="post">
                     <input class="ui button" type="submit" value="Logout" />
@@ -37,29 +50,53 @@
 <div id="maincontent" class="ui main container">
     <div class="ui form">
         <div class="field">
-            <div class="three wide field" sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')">
-                <label>Student ID:</label>
-                <input type="text" name="studentId">
+            <div class="resultItem">
+                <p class="item"><Strong>Student Id:</Strong> <span id="studentIdSpan" th:text="${student.id}"></span></p>
+                <p class="item"><strong>Name:</strong> <span th:text="${student.name}"></span></p>
+                <p class="item"><strong>Entry:</strong> <span th:text="${student.entry}"></span></p>
             </div>
             <div class="three wide field">
-                <label>Block:</label>
-                <select class="ui fluid dropdown">
-                <option value="">block</option>
-                </select>
+                <div id="cumulativeData">
+                    <fieldset>
+                        <legend>Cumulative TM Attendance</legend>
+                        <p class="tmAttendance_data total_tm_attendance">
+                            Total Sessions Possible: <span>135</span>
+                        </p>
+                        <p class="tmAttendance_data total_tm_attendance">
+                            Total Sessions Attended: <span></span>
+                        </p>
+                        <p class="tmAttendance_data total_tm_attendance">
+                            Percent Attendance: <span></span>
+                        </p>
+                    </fieldset>
+                <br/><br/>
+                </div>
+                    <div class="three wide field" sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')">
+                        <label>Student ID:</label>
+                        <input type="text" name="studentId">
+                    </div>
+                    <label>
+                        Block:
+                    </label> 
+                    <select id="meditationBlock" class="ui fluid dropdown" >
+                        <option value="">-- Select Block --</option>
+                        <option th:each="block,i : ${blocks}" th:value="${block.name}" th:text="${block.name}">block</option>
+                    </select>
             </div>
         </div>
     </div>
+    <br/>
     <p>
-        Session in block: <span>0</span>
+        Session in block: <span id="sessionInBlock">0</span>
     </p>
     <p>
-        Days present: <span>0</span>
+        Days present: <span id="daysPresent">0</span>
     </p>
     <p>
-        Percentage attended: <span>0</span>
+        Percentage attended: <span id="percentageAttended">0</span>
     </p>
     <p>
-        Extra credit points: <span>0</span>
+        Extra credit points: <span id="creditPoints">0</span>
     </p>
     <div class="ui grid">
         <div class="four wide column">
@@ -75,5 +112,6 @@
     </div>
 
 </div>
+<script type="text/javascript" th:src="@{/js/student.js}"></script>
 </body>
 </html>
