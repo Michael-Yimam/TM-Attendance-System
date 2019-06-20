@@ -43,16 +43,16 @@ values (1, 'ADMIN'),
 
 
 Insert Into STUDENT(STUDENT_ID,BARCODE,ENTRY,NAME)
-values ('986957','1234','november 2018','michael'),
-       ('986958','1235','november 2018','fisseha'),
-       ('986959','1236','february 2019','mohamed'),
-       ('986960','1237','november 2018','abeba'),
-       ('986955','1238','november 2018','dawit'),
-       ('986954','1239','april 2018','john'),
-       ('986953','1230','november 2018','lukas'),
-       ('986952','1214','february 2019','kong'),
-       ('986951','1224','november 2018','buba'),
-       ('986950','1244','february 2019','eliyas');
+values ('986957','1234','November 2018','michael'),
+       ('986958','1235','November 2018','fisseha'),
+       ('986959','1236','February 2019','mohamed'),
+       ('986960','1237','November 2018','abeba'),
+       ('986955','1238','November 2018','dawit'),
+       ('986954','1239','April 2018','john'),
+       ('986953','1230','November 2018','lukas'),
+       ('986952','1214','February 2019','kong'),
+       ('986951','1224','November 2018','buba'),
+       ('986950','1244','February 2019','eliyas');
 
 Insert Into Admin(ID, NAME, EMAIL)
 values ('admin', 'admin', 'admin@mum.edu');

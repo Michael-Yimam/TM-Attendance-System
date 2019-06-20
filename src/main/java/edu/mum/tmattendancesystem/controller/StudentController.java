@@ -57,6 +57,7 @@ public class StudentController {
     private Model findTotalTMAttendance(Model model, Student student){
 
         List<Block> blocks = blockService.findAll();
+        System.out.println("number of blocks " + blocks.size());
         int found = 0;
         int numberOfPossibleMediations = 0;
         for(Block b : blocks){
@@ -70,6 +71,9 @@ public class StudentController {
 
         model.addAttribute("totalMediationAttended", tmAttendances.size());
         model.addAttribute("totalMediationPossible", numberOfPossibleMediations);
+
+        System.out.println("total attedance"+ tmAttendances.size());
+        System.out.println("total possible"+ numberOfPossibleMediations);
 
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
