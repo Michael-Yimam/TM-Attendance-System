@@ -21,4 +21,9 @@ public class CourseEnrollmentServiceImpl implements CourseEnrollmentService {
         return repository.findAllByCourse(course);
     }
 
+    @Override
+    public List<CourseEnrollment> findAllByStudentId(String id) {
+        return repository.findAllByStudentId(id);
+    }
+
 }

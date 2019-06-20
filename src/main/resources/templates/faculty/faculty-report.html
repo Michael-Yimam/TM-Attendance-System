@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>Admin Page</title>
@@ -25,25 +26,25 @@
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="item">TM Attendance</a>
-        <a href="checkingPage.html" class="item">TM Checking</a>
-        <a th:href="@{/attendance/block-report}"  class="item">View Morning TM Attendance</a>
+
+        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
+        <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}"  class="item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/tm/report}" class="item">View Entry Report</a>
+
 
         <div class="right menu">
-            <div class="item">
-                <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-md btn-danger btn-block" name="registration"
-                            type="Submit">Logout
-                    </button>
-                </form>
-            </div>
+            <form th:action="@{/logout}" method="post">
+                <input class="ui button" type="submit" value="Logout" />
+            </form>
         </div>
 
     </div>
 </div>
 <div class="container">
 
-    <form th:action="@{/logout}" method="get">
+    <form th:action="@{/logout}" method="GET">
         <button class="btn btn-md btn-danger btn-block" name="registration"
                 type="Submit">Logout
         </button>
@@ -62,7 +63,7 @@
 
 <!--Select course id and Student id-->
 <div  class="ui segment">
-    <form class="ui form" th:action = "@{/TM-attendance/block}" method = "POST">
+    <form class="ui form" th:action = "@{/TM-attendance/block}" method = "GET">
         <h4 class="ui dividing header">TM Attendance Per Course</h4>
         <div class="two fields">
             <div class="field">
@@ -81,7 +82,7 @@
     </form>
 </div>
 <div  class="ui segment">
-    <form class="ui form" th:action = "@{/TM-attendance/block/student}" method = "POST">
+    <form class="ui form" th:action = "@{/TM-attendance/block/student}" method = "GET">
         <h4 class="ui dividing header">TM Attendance Per Student </h4>
         <div class="two fields">
             <div class="field">

@@ -28,11 +28,13 @@
         <a href="studentAttendance.html" class="item">TM Attendance</a>
         <a href="checkingPage.html" class="item">TM Checking</a>
         <a th:href="@{/attendance/block-report}"  class="item">View Morning TM Attendance</a>
-        <form th:action="@{/logout}" method="get">
-            <button class="btn btn-md btn-danger btn-block" name="registration"
-                    type="Submit">Logout
-            </button>
-        </form>
+
+        <div class="right menu">
+            <form th:action="@{/logout}" method="post">
+                <input class="ui button" type="submit" value="Logout" />
+            </form>
+        </div>
+
     </div>
 </div>
 
@@ -44,11 +46,12 @@
         </button>
     </form>
 
-    <div class="panel-group" style="margin-top:40px">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <!--<h2> TM Attendance for <span th:utext="${student.name}"></span>  </h2>-->
-            </div>
+    <div class="ui message" style="margin-top:40px; width:80%">
+        <div class="panel-heading">
+            <h2> Student Morning TM Attendance </h2>
+            <p> Name: <span th:utext="${student.name}"></span>  </p>
+            <p> Id: <span th:utext="${student.id}"></span>  </p>
+            <h4> Extra Credit: <span th:utext="${extraCredit}"></span>  </h4>
         </div>
     </div>
 </div>
@@ -59,14 +62,14 @@
                 <tr>
                     <th>Date</th>
                     <th>Location</th>
-                    <th>Attended</th>
+                    <th>Present</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item: ${attendanceList}">
-                    <td> <span th:text = "${item.getAttendanceKey().date}"></span></td>
-                    <td> <span th:text = "${item.location}"></span></td>
-                    <td> <span th:text = "True"></span></td>
+                <tr th:each="entry: ${attendanceList}">
+                    <td> <span th:text = "${entry.key}"></span></td>
+                    <td> <span th:text = "DH"></span></td>
+                    <td> <span th:text = "${entry.value}"></span></td>
                 </tr>
                 </tbody>
         </table>

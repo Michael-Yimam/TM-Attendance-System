@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/fileUpload.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <style type="text/css">
+        #maincontent {
+            margin-top: 7em;
+            margin-bottom: -7em;
+        }
+    </style>
+</head>
+
+<body>
+<div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
+    <div class="ui container">
+
+        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
+        <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}"  class="item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/tm/report}" class="item">View Entry Report</a>
+
+
+        <div class="right menu">
+            <form th:action="@{/logout}" method="post">
+                <input class="ui button" type="submit" value="Logout" />
+            </form>
+        </div>
+
+    </div>
+</div>
+<div id="maincontent">
+
+    <div class="ui main container">
+
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+            <p class="admin-message-text text-center" th:utext="${message}"></p>
+        </div>
+    </div>
+
+    <div  class="ui segment">
+        <form class="ui form" th:action = "@{/tm/entry}" method = "GET">
+            <h4 class="ui dividing header">Entry Reports</h4>
+            <div class="two fields">
+                <div class="field">
+                    <label> Entry </label>
+                    <select class="ui fluid dropdown" th:name="entryId" th:maxlength="20">
+                        <option selected value = ""> --Select Course Id</option>
+                        <option value="November 2018"> November 2018</option>
+                        <option value="February 2019"> February 2019</option>
+                        <option value="May 2019"> May 2019</option>
+                        <option value="August 201"> August 2019</option>
+                    </select>
+                    </select>
+                </div>
+            </div>
+
+            <button type="Submit" class="ui primary button">Submit</button>
+        </form>
+    </div>
+
+    <!--Select course id and Student id-->
+
+    <div  class="ui segment">
+        <form class="ui form" th:action = "@{/TM-attendance/block}" method = "GET">
+            <h4 class="ui dividing header">Entry TM Attendance Reports</h4>
+            <div class="two fields">
+                <div class="field">
+                    <label>Course Id/Block Number</label>
+                    <select class="ui fluid dropdown" th:name="courseId" th:maxlength="20">
+                        <option selected value = ""> --Select Course Id</option>
+                        <option th:each = "item: ${courses}"
+                                th:value="${item.id}"
+                                th:label="${item.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="Submit" class="ui primary button">Submit</button>
+        </form>
+    </div>
+    <div  class="ui segment">
+        <form class="ui form" th:action = "@{/TM-attendance/block/student}" method = "GET">
+            <h4 class="ui dividing header">TM Attendance Per Student </h4>
+            <div class="two fields">
+                <div class="field">
+                    <label>Course Id</label>
+                    <select class="ui fluid dropdown" th:name="courseId" th:maxlength="16">
+                        <option selected value = ""> --Select Course Id</option>
+                        <option th:each = "item: ${courses}"
+                                th:value="${item.id}"
+                                th:label="${item.id}">
+                        </option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Student Id</label>
+                    <input type="text" th:name="studentId" maxlength="16" placeholder="Student Id">
+                </div>
+            </div>
+            <button type="Submit" class="ui primary button">Submit</button>
+        </form>>
+    </div>
+    </div>
+</div>
+</body>
+</html>

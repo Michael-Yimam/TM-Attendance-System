@@ -77,30 +77,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/admin/home", method = RequestMethod.GET)
-    public ModelAndView adminHome(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("User Id: " + auth.getName());
-        Admin admin = adminService.findById(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + " (" + admin.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("admin/home");
-        return modelAndView;
-    }
-
-    @RequestMapping(value="/student/home", method = RequestMethod.GET)
-    public ModelAndView studentHome(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Logged in User Id: " + auth.getName());
-        UserCredentials user = userService.findByUserName(auth.getName());
-        //modelAndView.addObject("userName", "Welcome " + admin.getName() + " " + admin.getLastName() + " (" + admin.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("student/home");
-        return modelAndView;
-    }
-
     @RequestMapping(value="/access-error", method = RequestMethod.GET)
     public ModelAndView accessError(){
         ModelAndView modelAndView = new ModelAndView();
