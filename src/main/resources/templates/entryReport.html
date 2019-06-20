@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
     <title>Entry Report</title>
@@ -18,14 +20,19 @@
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="item">TM Attendance</a>
-        <a href="checkingPage.html" class="item">TM Checking</a>
-        <a href="blockReport.html"  class="item">Block Report</a>
-        <a href="admin/uploadAttendance.html" class="item">Upload Attendance</a>
-        <a href="entryReport.html" class="active item">Entry Report</a>
+        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
+        <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}" class="item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="active item">Entry Report</a>
         <div class="right menu">
             <div class="item">
-                <a class="ui button">Logout</a>
+                <span id="userName" th:text="${student.name}"></span>
+            </div>
+            <div class="item">
+                <form th:action="@{/logout}" method="post">
+                    <input class="ui button" type="submit" value="Logout" />
+                </form>
             </div>
         </div>
     </div>

@@ -32,7 +32,7 @@ public class FileUploadController {
     StudentService studentService;
 
     //Save the uploaded file to this folder
-    private static final String UPLOAD_LOCATION = "C://Users/Fisseha/Desktop";
+    private static final String UPLOAD_LOCATION = "C://";
 
     @GetMapping("/admin")
     public String index(){
