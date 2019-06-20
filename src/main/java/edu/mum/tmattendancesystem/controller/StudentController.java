@@ -1,8 +1,6 @@
 package edu.mum.tmattendancesystem.controller;
 
-import edu.mum.tmattendancesystem.domain.Block;
-import edu.mum.tmattendancesystem.domain.Student;
-import edu.mum.tmattendancesystem.domain.TMAttendance;
+import edu.mum.tmattendancesystem.domain.*;
 import edu.mum.tmattendancesystem.service.BlockService;
 import edu.mum.tmattendancesystem.service.StudentService;
 import edu.mum.tmattendancesystem.service.TMAttendanceService;
@@ -14,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -50,7 +48,21 @@ public class StudentController {
     }
 
     @GetMapping("/checkingPage")
-    public String studentTMChencking(){
+    public String studentTMChencking(Model model){
+
+        //Getting student id and name from authorization configurer
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        //Getting student from database
+        Student student = studentService.findById(auth.getName());
+
+        List<TMChecking> tmCheckings = student.getTmCheckings();
+        List<Retreat> tmRetreats = student.getRetreats();
+        System.out.println("his retreats " + tmRetreats.size());
+
+        model.addAttribute("studentTmCheckings", tmCheckings);
+        model.addAttribute("studentRetreats", tmRetreats);
+        model.addAttribute("student", student);
         return "checkingPage";
     }
 
@@ -76,6 +88,32 @@ public class StudentController {
 
         model.addAttribute("totalPercentage", (df.format(((float)tmAttendances.size() / numberOfPossibleMediations) * 100)) + "%");
         return model;
+    }
+
+    private class StudentTMChecking{
+        private String checkingType;
+        private LocalDate date;
+
+        public StudentTMChecking(String checkingType, LocalDate date) {
+            this.checkingType = checkingType;
+            this.date = date;
+        }
+
+        public String getCheckingType() {
+            return checkingType;
+        }
+
+        public void setCheckingType(String checkingType) {
+            this.checkingType = checkingType;
+        }
+
+        public LocalDate getDate() {
+            return date;
+        }
+
+        public void setDate(LocalDate date) {
+            this.date = date;
+        }
     }
 
 }
