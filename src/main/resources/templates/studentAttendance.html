@@ -57,13 +57,13 @@
                     <fieldset>
                         <legend>Cumulative TM Attendance</legend>
                         <p class="tmAttendance_data total_tm_attendance">
-                            Total Sessions Possible: <span>135</span>
+                            Total Sessions Possible: <span th:text="${totalMediationPossible}">135</span>
                         </p>
                         <p class="tmAttendance_data total_tm_attendance">
-                            Total Sessions Attended: <span></span>
+                            Total Sessions Attended: <span th:text="${totalMediationAttended}"></span>
                         </p>
                         <p class="tmAttendance_data total_tm_attendance">
-                            Percent Attendance: <span></span>
+                            Percent Attendance: <span th:text="${totalPercentage}"></span>
                         </p>
                     </fieldset>
                 <br/><br/>
@@ -109,6 +109,7 @@
     </div>
 
 </div>
+<script type="text/javascript" src="https://raw.githubusercontent.com/rubo77/table2CSV/master/table2CSV.js"></script>
 <script type="text/javascript" th:src="@{/js/student.js}"></script>
 </body>
 </html>
