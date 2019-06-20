@@ -25,7 +25,7 @@
         <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
         <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}"  class="item">Block Report</a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="active item">Upload Attendance</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/tm/report}" class="item">Entry Report</a>
 
         <div class="right menu">
             <form th:action="@{/logout}" method="post">
