@@ -30,9 +30,9 @@
 
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
+        <a th:href="@{/studentAttendance}" sec:authorize="hasAuthority('STUDENT')" class="item">TM Attendance</a>
         <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="active item">TM Checking</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}" class="item">Block Report</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/TM-attendance}" class="item">Block Report</a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
         <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
 

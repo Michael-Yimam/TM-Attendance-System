@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 
 <head>
-    <title>Admin Page</title>
+    <title>Faculty Page</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -25,16 +27,24 @@
 <body>
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
-        <a href="studentAttendance.html" class="item">TM Attendance</a>
-        <a href="checkingPage.html" class="item">TM Checking</a>
-        <a th:href="@{/TM-attendance}"  class="item">View Morning TM Attendance</a>
+<!--        <a href="studentAttendance.html" class="item">TM Attendance</a>-->
+<!--        <a href="checkingPage.html" class="item">TM Checking</a>-->
+<!--        <a th:href="@{/TM-attendance}"  class="item">View Morning TM Attendance</a>-->
+        <a th:href="@{/studentAttendance}" sec:authorize="hasAuthority('STUDENT')" class="item">TM Attendance</a>
+        <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/TM-attendance}"  class="item">Block Report</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="active item">Upload Attendance</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/tm/report}" class="item">Entry Report</a>
 
         <div class="right menu">
             <div class="item">
-                <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-md btn-danger btn-block" name="registration"
-                            type="Submit">Logout
-                    </button>
+<!--                <form th:action="@{/logout}" method="get">-->
+<!--                    <button class="btn btn-md btn-danger btn-block" name="registration"-->
+<!--                            type="Submit">Logout-->
+<!--                    </button>-->
+<!--                </form>-->
+                <form th:action="@{/logout}" method="post">
+                    <input class="ui button" type="submit" value="Logout" />
                 </form>
             </div>
         </div>

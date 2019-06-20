@@ -27,9 +27,9 @@
 <div class="ui large top fixed menu visible" style="display: flex !important; margin-bottom: 7em;">
     <div class="ui container">
 
-        <a th:href="@{/studentAttendance}" class="item">TM Attendance</a>
+        <a th:href="@{/studentAttendance}" sec:authorize="hasAuthority('STUDENT')" class="item">TM Attendance</a>
         <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}"  class="item">Block Report</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/TM-attendance}"  class="item">Block Report</a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
         <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/tm/report}" class="item">View Entry Report</a>
 
@@ -46,14 +46,14 @@
 
     <div class="ui main container">
 
-    <div class="panel-group" style="margin-top:40px">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <span th:utext="${userName}"></span>
-            </div>
-            <p class="admin-message-text text-center" th:utext="${message}"></p>
-        </div>
-    </div>
+<!--    <div class="panel-group" style="margin-top:40px">-->
+<!--        <div class="panel panel-primary">-->
+<!--            <div class="panel-heading">-->
+<!--                <span th:utext="${userName}"></span>-->
+<!--            </div>-->
+<!--            <p class="admin-message-text text-center" th:utext="${message}"></p>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div  class="ui segment">
         <form class="ui form" th:action = "@{/tm/entry}" method = "GET">
