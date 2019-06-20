@@ -75,7 +75,7 @@ public class AdminController {
     public String attendanceForm(Model model){
         System.out.println("In /tm/reports ....");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Admin user = adminService.findById(auth.getName());
+//        UserCredentials user = userService.findById(auth.getName());
 
         List<CourseOffer> courses = courseOfferService.findAll();
         model.addAttribute("courses", courses);
@@ -83,7 +83,7 @@ public class AdminController {
 
 
         model.addAttribute("student", new Student());
-        model.addAttribute("userName", "Welcome " + user.getName() + " (" + user.getEmail() + ")");
+//        model.addAttribute("userName", "Welcome " + user.getName() + " (" + user.getEmail() + ")");
         model.addAttribute("message","Content Available Only for Admin users");
         return "admin/admin-report";
     }
