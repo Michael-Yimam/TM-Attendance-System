@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CourseOfferRepository extends CrudRepository<CourseOffer, String>{
     List<CourseOffer> findAllByFaculty(Faculty faculty);
+    List<CourseOffer> findAll();
 
 
 }

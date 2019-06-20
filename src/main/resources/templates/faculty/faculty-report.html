@@ -31,7 +31,7 @@
 
         <div class="right menu">
             <div class="item">
-                <form th:action="@{/logout}" method="get">
+                <form th:action="@{/logout}" method="GET">
                     <button class="btn btn-md btn-danger btn-block" name="registration"
                             type="Submit">Logout
                     </button>
@@ -43,7 +43,7 @@
 </div>
 <div class="container">
 
-    <form th:action="@{/logout}" method="get">
+    <form th:action="@{/logout}" method="GET">
         <button class="btn btn-md btn-danger btn-block" name="registration"
                 type="Submit">Logout
         </button>
@@ -62,7 +62,7 @@
 
 <!--Select course id and Student id-->
 <div  class="ui segment">
-    <form class="ui form" th:action = "@{/TM-attendance/block}" method = "POST">
+    <form class="ui form" th:action = "@{/TM-attendance/block}" method = "GET">
         <h4 class="ui dividing header">TM Attendance Per Course</h4>
         <div class="two fields">
             <div class="field">
@@ -81,7 +81,7 @@
     </form>
 </div>
 <div  class="ui segment">
-    <form class="ui form" th:action = "@{/TM-attendance/block/student}" method = "POST">
+    <form class="ui form" th:action = "@{/TM-attendance/block/student}" method = "GET">
         <h4 class="ui dividing header">TM Attendance Per Student </h4>
         <div class="two fields">
             <div class="field">

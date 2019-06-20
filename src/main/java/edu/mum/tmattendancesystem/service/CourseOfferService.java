@@ -11,5 +11,6 @@ public interface CourseOfferService {
     List<CourseOffer> findAllByFaculty(Faculty faculty);
     Block findBlockByCourseId(String id);
     CourseOffer findById(String id);
+    List<CourseOffer> findAll();
 
 }

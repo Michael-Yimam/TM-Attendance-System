@@ -66,7 +66,7 @@ public class FacultyController {
         return "faculty/faculty-report";
     }
 
-    @RequestMapping(value="/TM-attendance/block", method = RequestMethod.POST)
+    @RequestMapping(value="/TM-attendance/block", method = RequestMethod.GET)
     public String viewBlockAttendance(@RequestParam("courseId") String courseId, Model model){
         // Check input parameters
         System.out.println("Entered course Id: " + courseId);
@@ -87,7 +87,7 @@ public class FacultyController {
 
 
 
-    @RequestMapping(value="/TM-attendance/block/student", method = RequestMethod.POST)
+    @RequestMapping(value="/TM-attendance/block/student", method = RequestMethod.GET)
     public String viewStudentAttendance(@RequestParam("courseId") String courseId,
                                  @RequestParam("studentId") String studentId, Model model){
         // Check input parameters
