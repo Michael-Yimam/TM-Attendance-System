@@ -1,6 +1,10 @@
--- Insert data into block table
 
-
+create table if not exists persistent_logins (
+    username varchar_ignorecase(100) not null,
+    series varchar(64) primary key,
+    token varchar(64) not null,
+    last_used timestamp not null
+);
 
 Insert Into Block(Block_Id, START_DATE, END_DATE, NUMBER_OF_MEDITATION, NUMBER_OF_WEEKS)
 values ('November 2018', '2018-11-01', '2018-11-24', 21, 4),
@@ -160,11 +164,6 @@ values ('2018-11-01','DB','AM','REGULAR','November 2018'),
        ('2019-06-19','DB','AM','REGULAR','June 2019'),
        ('2019-06-20','DB','AM','REGULAR','June 2019');
 
-/*
-============================================================================
-*/
-
-
 Insert Into TMATTENDANCE(DATE, STUDENT_ID,BARCODE, Location, Meditation_Time_Type)
 values ('2019-06-10', '986957', '1234', 'DH', 'EAM'),
        ('2019-06-10', '986959', '1235', 'DH', 'AM'),
@@ -211,3 +210,21 @@ values ('2019-06-10', '986957', '1234', 'DH', 'EAM'),
        ('2019-05-15', '986950', '1243', 'DH', 'AM'),
        ('2019-05-16', '986958', '1245', 'DH', 'EAM'),
        ('2019-05-16', '986950', '1247', 'DH', 'AM');
+
+Insert Into TMCHECKING (ID, CHECKING_TYPE, DATE)
+values
+       (1, 'INDIVIDUAL', '2018-12-22'),
+       (2, 'GROUP', '2018-12-23'),
+       (3, 'INDIVIDUAL', '2019-01-11'),
+       (4, 'INDIVIDUAL', '2019-02-15'),
+       (5, 'GROUP', '2018-12-23');
+
+Insert Into STUDENT_TM_CHECKINGS(STUDENT_STUDENT_ID, TM_CHECKINGS_ID)
+values
+       ('986957', 1),
+       ('986957', 3),
+       ('986957', 4),
+       ('986957', 5);
+
+Insert Into RETREAT(ID, DATE)
+values('986957', '2019-01-02');

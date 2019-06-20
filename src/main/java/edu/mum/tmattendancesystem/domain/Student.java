@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class Student{
 //    @Ignore
 //    private List<TMAttendance> meditations;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Retreat> retreats;
 
     @OneToMany

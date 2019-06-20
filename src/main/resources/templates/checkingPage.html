@@ -15,6 +15,15 @@
             margin-top: 7em;
             margin-bottom: -7em;
         }
+
+        .resultItem{
+            position: absolute;
+            margin-left: 68%;
+            width: 200px;
+            background-color: lightgray;
+            border-radius: 2px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -42,13 +51,39 @@
 <div id="maincontent" class="ui main container">
 
     <div class="ui grid">
+        <div class="resultItem">
+            <p class="item"><Strong>Student Id:</Strong> <span id="studentIdSpan" th:text="${student.id}"></span></p>
+            <p class="item"><strong>Name:</strong> <span th:text="${student.name}"></span></p>
+            <p class="item"><strong>Entry:</strong> <span th:text="${student.entry}"></span></p>
+        </div>
         <div class="four wide column">
-            <label>TM Checking</label>
+
+            <label><h3>TM Checking</h3></label>
             <table class="ui small very compact celled table">
                 <thead>
                 <tr>
                     <th>Date</th>
                     <th>Type</th>
+                </tr>
+                <tr th:each="checking : ${studentTmCheckings}">
+                    <td th:text="${checking.date}"></td>
+                    <td th:text="${checking.checkingType}"></td>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="ui grid">
+        <div class="four wide column">
+            <label><h3>TM Retreat</h3></label>
+            <table class="ui small very compact celled table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                </tr>
+                <tr th:each="retreat : ${studentRetreats}">
+                    <td th:text="${retreat.date}"></td>
                 </tr>
                 </thead>
             </table>
