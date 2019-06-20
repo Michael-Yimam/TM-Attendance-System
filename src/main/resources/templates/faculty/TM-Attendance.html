@@ -28,11 +28,13 @@
         <a href="studentAttendance.html" class="item">TM Attendance</a>
         <a href="checkingPage.html" class="item">TM Checking</a>
         <a th:href="@{/attendance/block-report}"  class="item">View Morning TM Attendance</a>
-        <form th:action="@{/logout}" method="get">
-            <button class="btn btn-md btn-danger btn-block" name="registration"
-                    type="Submit">Logout
-            </button>
-        </form>
+
+        <div class="right menu">
+            <form th:action="@{/logout}" method="post">
+                <input class="ui button" type="submit" value="Logout" />
+            </form>
+        </div>
+
     </div>
 </div>
 
