@@ -56,7 +56,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/registration").permitAll()
-                .antMatchers("/admin/**", "/h2-console/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/admin/**", "/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers("/faculty/**").hasAuthority("FACULTY")
+                .antMatchers("/student/**").hasAuthority("STUDENT").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 .successHandler(authenticationSuccessHandler)
@@ -73,7 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository());
 
-                //.accessDeniedPage("/access-denied");
+                http.rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret");
     }
 
     @Override
@@ -88,4 +90,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         jdbcTokenRepositoryImpl.setDataSource(dataSource);
         return jdbcTokenRepositoryImpl;
     }
+
 }

@@ -42,9 +42,9 @@
     <div class="ui container">
         <a th:href="@{/studentAttendance}" class="active item">TM Attendance</a>
         <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}" class="item">Block Report</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/TM-attendance/block}" class="item">Block Report</a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')"  th:href= "@{/tm/report}"  class="item">Entry Report</a>
 
         <div class="right menu">
             <div class="item">

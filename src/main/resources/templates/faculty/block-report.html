@@ -48,33 +48,30 @@
 
     <div class="ui message" style="margin-top:40px; width:80%">
         <div class="panel-heading">
-            <h2> Student Morning TM Attendance </h2>
-            <p> Name: <span th:utext="${student.name}"></span>  </p>
-            <p> Id: <span th:utext="${student.id}"></span>  </p>
-            <h4> Extra Credit: <span th:utext="${extraCredit}"></span>  </h4>
+            <h2> Exra-Credit List </h2>
+            <p> Course Id: <span th:utext="${courseId}"></span>  </p>
+
         </div>
     </div>
 </div>
 <div id="maincontent" class="ui main container">
 
-            <table class= "ui celled striped table" style="width:80%">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Location</th>
-                    <th>Present</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="entry: ${attendanceList}">
-                    <td> <span th:text = "${entry.key}"></span></td>
-                    <td> <span th:text = "DH"></span></td>
-                    <td> <span th:text = "${entry.value}"></span></td>
-                </tr>
-                </tbody>
-        </table>
+    <table class= "ui celled striped table" style="width:80%">
+        <thead>
+        <tr>
+            <th>Student Id</th>
+            <th>Extra-Credit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry: ${report}">
+            <td> <span th:text = "${entry.key}"></span></td>
+            <td> <span th:text = "${entry.value}"></span></td>
+        </tr>
+        </tbody>
+    </table>
 
-    </div>
+</div>
 </div>
 
 </body>

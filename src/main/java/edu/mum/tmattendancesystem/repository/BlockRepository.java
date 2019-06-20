@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface BlockRepository extends CrudRepository<Block, String> {
     List<Block> findAll();
+
 }

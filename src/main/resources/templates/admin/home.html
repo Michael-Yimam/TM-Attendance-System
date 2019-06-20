@@ -30,18 +30,13 @@
         <a sec:authorize="hasAuthority('STUDENT')" th:href="@{/checkingPage}" class="item">TM Checking</a>
         <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="@{/blockReport}"  class="item">Block Report</a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/uploadAttendance}" class="item">Upload Attendance</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'FACULTY')" th:href="entryReport.html" class="item">Entry Report</a>
+        <a th:href="@{/tm/report}" class="item">View Entry Report</a>
+
         <div class="right menu">
-            <div class="item">
-                <form th:action="@{/logout}" method="post">
-                    <input class="ui button" type="submit" value="Logout" />
-                </form>
-            </div>
+            <form th:action="@{/logout}" method="post">
+                <input class="ui button" type="submit" value="Logout" />
+            </form>
         </div>
-
-
-
-
     </div>
 </div>
 
