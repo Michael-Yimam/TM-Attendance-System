@@ -25,7 +25,7 @@ public class CourseEnrollment {
     @JoinColumn
     private Student student;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Course_Id")
     private CourseOffer course;
 }

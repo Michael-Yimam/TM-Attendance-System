@@ -34,4 +34,9 @@ public class CourseOfferServiceImpl implements CourseOfferService {
         return course.getBlock();
     }
 
+    @Override
+    public CourseOffer findById(String id) {
+        return courseOfferRepository.findById(id).get();
+    }
+
 }

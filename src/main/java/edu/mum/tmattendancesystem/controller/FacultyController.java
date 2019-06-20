@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class FacultyController {
@@ -65,26 +67,25 @@ public class FacultyController {
     }
 
     @RequestMapping(value="/TM-attendance/block", method = RequestMethod.POST)
-    public String viewBlockAttendance(@RequestParam("courseId") String courseId,
-                                 @RequestParam("studentId") String studentId, Model model){
+    public String viewBlockAttendance(@RequestParam("courseId") String courseId, Model model){
         // Check input parameters
         System.out.println("Entered course Id: " + courseId);
-        System.out.println("Entered student Id: " + studentId);
 
         //Get Faculty Id;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Block block = courseOfferService.findBlockByCourseId(courseId);
 
-        List<TMAttendance> attendanceList = attendanceService.
-                findByStudentAndBlock(studentId,
-                        block.getStartDate(), block.getEndDate());
-        //List<TMAttendance> attendanceList = attendanceService.findByStudentId(studentId);
-        System.out.println("List size: " + attendanceList.size());
-        model.addAttribute("attendanceList",attendanceList);
-        //modelAndView.addObject("student", studentService.findById(student.getId()));
-        return "faculty/TM-Attendance";
+        Map<String, Double> report = attendanceService.
+                findBlockReport(courseId, block);
+        System.out.println("List size: " + report.size());
+        model.addAttribute("report",report);
+        model.addAttribute("courseId", courseId);
+        return "faculty/block-report";
     }
+
+
+
 
     @RequestMapping(value="/TM-attendance/block/student", method = RequestMethod.POST)
     public String viewStudentAttendance(@RequestParam("courseId") String courseId,
@@ -97,13 +98,13 @@ public class FacultyController {
 
         Block block = courseOfferService.findBlockByCourseId(courseId);
 
-        List<TMAttendance> attendanceList = attendanceService.
-                findByStudentAndBlock(studentId,
-                        block.getStartDate(), block.getEndDate());
-        //List<TMAttendance> attendanceList = attendanceService.findByStudentId(studentId);
+        Map<LocalDate, Boolean> attendanceList = attendanceService.
+                findByStudentAndBlock(studentId,block);
+        Double extraCredt = attendanceService.findExtraCredit(studentId, block);
         System.out.println("List size: " + attendanceList.size());
         model.addAttribute("attendanceList",attendanceList);
-        //modelAndView.addObject("student", studentService.findById(student.getId()));
+        model.addAttribute("extraCredit", extraCredt);
+        model.addAttribute("student", studentService.findById(studentId));
         return "faculty/TM-Attendance";
     }
 

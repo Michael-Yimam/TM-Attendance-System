@@ -44,11 +44,12 @@
         </button>
     </form>
 
-    <div class="panel-group" style="margin-top:40px">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <!--<h2> TM Attendance for <span th:utext="${student.name}"></span>  </h2>-->
-            </div>
+    <div class="ui message" style="margin-top:40px; width:80%">
+        <div class="panel-heading">
+            <h2> Student Morning TM Attendance </h2>
+            <p> Name: <span th:utext="${student.name}"></span>  </p>
+            <p> Id: <span th:utext="${student.id}"></span>  </p>
+            <h4> Extra Credit: <span th:utext="${extraCredit}"></span>  </h4>
         </div>
     </div>
 </div>
@@ -59,14 +60,14 @@
                 <tr>
                     <th>Date</th>
                     <th>Location</th>
-                    <th>Attended</th>
+                    <th>Present</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item: ${attendanceList}">
-                    <td> <span th:text = "${item.getAttendanceKey().date}"></span></td>
-                    <td> <span th:text = "${item.location}"></span></td>
-                    <td> <span th:text = "True"></span></td>
+                <tr th:each="entry: ${attendanceList}">
+                    <td> <span th:text = "${entry.key}"></span></td>
+                    <td> <span th:text = "DH"></span></td>
+                    <td> <span th:text = "${entry.value}"></span></td>
                 </tr>
                 </tbody>
         </table>
