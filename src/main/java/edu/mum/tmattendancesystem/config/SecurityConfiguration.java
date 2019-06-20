@@ -27,8 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private LoginSuccessHandler authenticationSuccessHandler;
-    @Autowired
 
+    @Autowired
     private DataSource dataSource;
 
     @Value("${spring.queries.users-query}")

@@ -1,10 +1,10 @@
-create table if not exists persistent_logins (
-    username varchar_ignorecase(100) not null,
-    series varchar(64) primary key,
-    token varchar(64) not null,
-    last_used timestamp not null
-);
 
+create table if not exists persistent_logins (
+  username varchar_ignorecase(100) not null,
+  series varchar(64) primary key,
+  token varchar(64) not null,
+  last_used timestamp not null
+  );
 
 Insert Into Block(Block_Id, START_DATE, END_DATE, NUMBER_OF_MEDITATION, NUMBER_OF_WEEKS)
     values ('November 2018', '2018-11-01', '2018-11-24', 21, 4),
